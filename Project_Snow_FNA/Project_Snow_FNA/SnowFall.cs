@@ -21,6 +21,11 @@ namespace Project_Snow_FNA
         private readonly Random random = new Random();
 
         /// <summary>
+        /// Количество снежинок.   
+        /// </summary>
+        public int kol = 156;
+
+        /// <summary>
         /// Инициализация графики в конструкторе снегопада.   
         /// </summary>
         public SnowFall()
@@ -47,16 +52,15 @@ namespace Project_Snow_FNA
         /// </summary>
         protected override void LoadContent()
         {
-            spriteBatch = new SpriteBatch(GraphicsDevice); 
+            spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            
             flakeTexture = Content.Load<Texture2D>("flake_n_1"); 
             flakeTexture_2 = Content.Load<Texture2D>("flake_n_2"); 
             backgroundTexture = Content.Load<Texture2D>("background"); 
 
             Snowflakes = new List<Snowflake>();
 
-            for (var i = 0; i < 156; i++)
+            for (var i = 0; i < kol; i++)
             {
                 var size = (float)random.Next(10, 25) / 100;
                 var speed = (float)random.Next(25,350);
@@ -76,6 +80,25 @@ namespace Project_Snow_FNA
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
             {
                 Exit();
+            }
+
+            if (Keyboard.GetState().IsKeyDown(Keys.Up))
+            {
+                for (var i = 0; i < 10; i++)
+                {
+                    var size = (float)random.Next(10, 25) / 100;
+                    var speed = (float)random.Next(25, 350);
+                    var startPos = new Vector2(random.Next(0, WindowWidth), random.Next(0, WindowHeight));
+
+                    Snowflakes.Add(new Snowflake(flakeTexture, startPos, speed, size));
+                    startPos = new Vector2(random.Next(0, WindowWidth), random.Next(0, WindowHeight));
+                    Snowflakes.Add(new Snowflake(flakeTexture_2, startPos, speed, size));
+                }
+            }
+
+            if (Keyboard.GetState().IsKeyDown(Keys.Down))
+            {
+                Snowflakes.RemoveRange(0, Math.Min(Snowflakes.Count, 10));   
             }
 
             foreach (var Snowflake in Snowflakes)
