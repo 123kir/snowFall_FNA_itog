@@ -8,11 +8,11 @@ namespace Project_Snow_FNA
 {
     public class SnowFall : Microsoft.Xna.Framework.Game
     {
-        GraphicsDeviceManager graphics; // оставить
-        SpriteBatch spriteBatch; // спрайт партия
+        GraphicsDeviceManager graphics;
+        SpriteBatch spriteBatch; 
 
         private Texture2D flakeTexture;
-        private Texture2D flakeTexture_2; // эксперемент
+        private Texture2D flakeTexture_2;
         private Texture2D backgroundTexture;
         private List<Snowflake> Snowflakes;
 
@@ -47,12 +47,12 @@ namespace Project_Snow_FNA
         /// </summary>
         protected override void LoadContent()
         {
-            spriteBatch = new SpriteBatch(GraphicsDevice); // оставить
+            spriteBatch = new SpriteBatch(GraphicsDevice); 
 
             
-            flakeTexture = Content.Load<Texture2D>("flake_n_1"); // фото снежинки
-            flakeTexture_2 = Content.Load<Texture2D>("flake_n_2"); // фото снежинки
-            backgroundTexture = Content.Load<Texture2D>("background"); // фото зада
+            flakeTexture = Content.Load<Texture2D>("flake_n_1"); 
+            flakeTexture_2 = Content.Load<Texture2D>("flake_n_2"); 
+            backgroundTexture = Content.Load<Texture2D>("background"); 
 
             Snowflakes = new List<Snowflake>();
 
@@ -60,18 +60,18 @@ namespace Project_Snow_FNA
             {
                 var size = (float)random.Next(10, 25) / 100;
                 var speed = (float)random.Next(25,350);
-                var startPos = new Vector2(random.Next(0, WindowWidth), random.Next(0, WindowHeight)); // оставить
+                var startPos = new Vector2(random.Next(0, WindowWidth), random.Next(0, WindowHeight)); 
 
                 Snowflakes.Add(new Snowflake(flakeTexture, startPos, speed, size));
-                startPos = new Vector2(random.Next(0, WindowWidth), random.Next(0, WindowHeight)); // оставить
-                Snowflakes.Add(new Snowflake(flakeTexture_2, startPos, speed, size)); // эксперемент
+                startPos = new Vector2(random.Next(0, WindowWidth), random.Next(0, WindowHeight)); 
+                Snowflakes.Add(new Snowflake(flakeTexture_2, startPos, speed, size)); 
             }
         }
 
         /// <summary>
         /// Обработка позиции снежинок.
         /// </summary>
-        protected override void Update(GameTime gameTime) // оставить
+        protected override void Update(GameTime gameTime) 
         {
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
             {
